@@ -25,7 +25,9 @@ SECRET_KEY = '(ok#7=@yz^xq!x=)v61#pk^hr$sl)=oensfou0oon8fp35bxh6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+LOGIN_REDIRECT_URL = '/user/login'
 
 
 # Application definition
@@ -130,4 +132,22 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK_DOCS = {
     'HIDE_DOCS': True
+}
+
+AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    # 认证配置
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+import datetime
+JWT_AUTH = {
+    # 重新定义jwt认证成功后返回的数据
+    'JWT_RESPONSE_PAYLOAD_HANDLER':'user.views.jwt_response_payload_handler',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),  #定义token过期时间为一天
 }
