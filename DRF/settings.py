@@ -148,6 +148,6 @@ REST_FRAMEWORK = {
 import datetime
 JWT_AUTH = {
     # 重新定义jwt认证成功后返回的数据
-    'JWT_RESPONSE_PAYLOAD_HANDLER':'user.views.jwt_response_payload_handler',
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'user.views.jwt_response_payload_handler',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),  #定义token过期时间为一天
 }
